@@ -3,6 +3,12 @@
 public class Category :BaseEntity
 {
     public string Name { get; set; }
-    public ICollection<Product> Products { get; set; }
+    
+}
+
+public class CategoryMap:BaseEntity
+{
+    public int CategoryId { get; set; }
+    public int ProductId { get; set; }
     
 }
