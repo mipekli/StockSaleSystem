@@ -12,12 +12,12 @@ builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices();
 builder.Services.AddControllers();
 
-// CORS Ayarları (Angular Frontend için)
+// CORS Ayarları (Frontend için)
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAngularUI", policy =>
+    options.AddPolicy("AllowFrontend", policy =>
     {
-        policy.WithOrigins("http://localhost:4200") // Angular'ın varsayılan portu
+        policy.AllowAnyOrigin()
               .AllowAnyHeader()
               .AllowAnyMethod();
     });
@@ -37,10 +37,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+// app.UseHttpsRedirection();
 
-// Angular için eklenen Cors policynin aktif edilmesi (Mutlaka pipeline'da Controller'dan önce gelmeli)
-app.UseCors("AllowAngularUI");
+// Frontend için eklenen Cors policynin aktif edilmesi (Mutlaka pipeline'da Controller'dan önce gelmeli)
+app.UseCors("AllowFrontend");
 
 app.MapControllers();
 
